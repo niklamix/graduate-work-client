@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">graduate-work-client</string>
+    <string name="et_password_hint">Password</string>
+    <string name="et_login_hint">Login</string>
+    <string name="btn_sign_up_text">Don\'t have an account? Sign up</string>
+    <string name="btn_login_text">Log in</string>
+    <string name="tv_authorization_text">Authorization</string>
+    <string name="til_name_error">Name must be more than 3 characters</string>
+    <string name="til_surname_error">Surname must be more than 3 characters</string>
+    <string name="til_email_error">Email is not valid</string>
+    <string name="til_country_error">Country must be more than 3 characters</string>
+    <string name="til_city_error">City must be more than 3 characters</string>
+    <string name="til_phone_error">Phone is not valid</string>
+    <string name="til_login_error">Login must be more than 3 characters</string>
+    <string name="til_password_error">Login must be more than 5 characters</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_register_text">Accept</string>
+    <string name="tv_welcome_text">Sign in to the app</string>
+    <string name="tv_registration_text">Registration</string>
+    <string name="tv_update_profile_text">Update profile</string>
+    <string name="et_name_text">Name</string>
+    <string name="et_surname_text">Surname</string>
+    <string name="btn_upload_photo_text">Upload photo</string>
+    <string name="tv_profile_text">User profile</string>
+    <string name="tv_user_login_text">Login: %s</string>
+    <string name="tv_user_email_text">Email: %s</string>
+    <string name="tv_user_country_text">Country: %s</string>
+    <string name="tv_user_city_text">City: %s</string>
+    <string name="tv_user_phone_text">Phone: %s</string>
+    <string name="tv_date_create_text">Date create account: %s</string>
+    <string name="tv_date_update_text">Date update profile: %s</string>
+    <string name="et_search_user_text">Search by name</string>
+    <string name="tv_search_user_text">Search user</string>
+    <string name="btn_welcome_register_text">Register</string>
+</resources>
