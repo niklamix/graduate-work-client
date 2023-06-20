@@ -91,7 +91,7 @@ class UserChangeViewModel : ViewModel() {
     private fun validateUser(userItemWrite: UserItemWrite): Boolean {
         var result = true
         val phoneRegex = Regex("^\\+?[1-9]\\d{3,14}\$")
-        if (userItemWrite.name?.length!! < 3) {
+        if (userItemWrite.name?.length!! < 2) {
             _errorInputName.value = true
             result = false
         }
@@ -104,7 +104,7 @@ class UserChangeViewModel : ViewModel() {
             _errorInputEmail.value = true
             result = false
         }
-        if (userItemWrite.country?.length!! < 3) {
+        if (userItemWrite.country?.length!! < 2) {
             _errorInputCountry.value = true
             result = false
         }

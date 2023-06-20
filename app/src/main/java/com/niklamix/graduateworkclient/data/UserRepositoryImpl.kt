@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.niklamix.graduateworkclient.domain.entity.ExceptionInfo
@@ -24,7 +23,7 @@ import java.io.IOException
 import java.util.concurrent.CountDownLatch
 
 object UserRepositoryImpl : UserRepository {
-    private const val REST_URL = "http://192.168.1.64:8080/"
+    private const val REST_URL = "http://192.168.1.70:8080/"
 
     private var credentials: String? = null
     private val gson = Gson()
@@ -271,7 +270,7 @@ object UserRepositoryImpl : UserRepository {
     private fun getToastMessage(message: String, context: Context?) {
         val handler = Handler(Looper.getMainLooper())
         handler.post {
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }
 }
