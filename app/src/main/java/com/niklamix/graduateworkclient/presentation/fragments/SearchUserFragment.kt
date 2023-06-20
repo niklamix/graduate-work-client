@@ -45,7 +45,7 @@ class SearchUserFragment : Fragment() {
         viewModel = ViewModelProvider(this)[SearchUserViewModel::class.java]
         binding.tilSearchUser.setEndIconOnClickListener {
             val filter = binding.etSearchUser.text.toString().split(" ")
-            val userFilter = UserFilter(filter.getOrElse(0) {""}, filter.getOrElse(1) {""})
+            val userFilter = UserFilter(filter.getOrElse(0) { "" }, filter.getOrElse(1) { "" })
             viewModel.getUserList(0, 10, userFilter, context)
             viewModel.userList.observe(viewLifecycleOwner) {
                 userListAdapter.submitList(it)
@@ -72,8 +72,11 @@ class SearchUserFragment : Fragment() {
     private fun setupUserProfileClickListener() {
         userListAdapter.onUserItemClickListener = {
             findNavController().navigate(
-                SearchUserFragmentDirections.actionSearchUserFragmentToUserProfileFragment(it)
+                SearchUserFragmentDirections.actionSearchUserFragmentToUserProfileFragment(
+                    RegisterArgs("mode_read", it)
+                )
             )
+
         }
     }
 

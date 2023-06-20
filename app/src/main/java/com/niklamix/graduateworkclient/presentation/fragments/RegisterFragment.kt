@@ -28,6 +28,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import com.niklamix.graduateworkclient.R
 import com.niklamix.graduateworkclient.databinding.FragmentRegisterBinding
+import com.niklamix.graduateworkclient.domain.entity.RegisterArgs
 import com.niklamix.graduateworkclient.domain.entity.UserItemRead
 import com.niklamix.graduateworkclient.domain.entity.UserItemWrite
 import com.niklamix.graduateworkclient.presentation.viewmodel.UserChangeViewModel
@@ -144,38 +145,40 @@ class RegisterFragment : Fragment() {
     }
 
     private fun launchUpdatedUserProfileFragment() {
-        if (screenMode == MODE_UPDATE) {
-            viewModel.updateUserItem(initUserItem(), context, false)
-            viewModel.updateSuccessful.observe(viewLifecycleOwner) {
-                if (it) {
-                    val item = viewModel.getUpdatedCurrentUser(context)
-                    findNavController().navigate(
-                        RegisterFragmentDirections.actionRegisterFragmentToUserProfileFragment(item!!)
-                    )
+        when (screenMode) {
+            MODE_UPDATE -> {
+                viewModel.updateUserItem(initUserItem(), context, false)
+                viewModel.updateSuccessful.observe(viewLifecycleOwner) {
+                    if (it) {
+                        val item = viewModel.getUpdatedCurrentUser(context)
+                        val args = RegisterArgs("mode_edit", item)
+                        findNavController().navigate(
+                            RegisterFragmentDirections.actionRegisterFragmentToUserProfileFragment(args)
+                        )
+                    }
                 }
             }
-        } else if (screenMode == MODE_REGISTER) {
-            viewModel.addUserItem(initUserItem(), context)
-            viewModel.addSuccessful.observe(viewLifecycleOwner) {
-                if (it) {
-                    val item = viewModel.getUpdatedCurrentUser(context)
-                    findNavController().navigate(
-                        RegisterFragmentDirections.actionRegisterFragmentToUserProfileFragment(item!!)
-                    )
+            MODE_REGISTER -> {
+                viewModel.addUserItem(initUserItem(), context)
+                viewModel.addSuccessful.observe(viewLifecycleOwner) {
+                    if (it) {
+                        val item = viewModel.getUpdatedCurrentUser(context)
+                        val args = RegisterArgs("mode_edit", item)
+                        findNavController().navigate(
+                            RegisterFragmentDirections.actionRegisterFragmentToUserProfileFragment(args)
+                        )
+                    }
                 }
             }
-        } else if (screenMode == MODE_ADMIN_UPDATE) {
-            viewModel.updateSuccessful.observe(viewLifecycleOwner) {
-                if (it) {
-                    viewModel.updateUserItem(initUserItem(), context, true, userItemRead?.id)
-                    findNavController().popBackStack()
+            MODE_ADMIN_UPDATE -> {
+                viewModel.updateUserItem(initUserItem(), context, true, userItemRead?.id)
+                viewModel.updateSuccessful.observe(viewLifecycleOwner) {
+                    if (it) {
+                        findNavController().popBackStack()
+                    }
                 }
             }
         }
-
-    }
-
-    private fun launchProfileFragment() {
 
     }
 

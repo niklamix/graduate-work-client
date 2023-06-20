@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.niklamix.graduateworkclient.R
 import com.niklamix.graduateworkclient.databinding.FragmentAuthBinding
+import com.niklamix.graduateworkclient.domain.entity.RegisterArgs
 import com.niklamix.graduateworkclient.domain.entity.UserItemRead
 import com.niklamix.graduateworkclient.presentation.viewmodel.UserViewModel
 import java.util.Locale
@@ -35,11 +36,21 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[UserViewModel::class.java]
-        binding.btnBackLogin.setOnClickListener {
+        lunchBackStackFragment()
+        authorize()
+        lunchRegisterFragment()
+    }
+
+    private fun lunchRegisterFragment() {
+        binding.btnSignUpLogin.setOnClickListener {
             findNavController().navigate(
-                AuthFragmentDirections.actionAuthFragmentToWelcomeFragment()
+                AuthFragmentDirections.actionAuthFragmentToRegisterFragment(RegisterArgs(
+                    "mode_register", null))
             )
         }
+    }
+
+    private fun authorize() {
         binding.btnLogin.setOnClickListener {
             updateCredentials()
             addTextChangeListener()
@@ -51,6 +62,14 @@ class AuthFragment : Fragment() {
                 }
 
             }
+        }
+    }
+
+    private fun lunchBackStackFragment() {
+        binding.btnBackLogin.setOnClickListener {
+            findNavController().navigate(
+                AuthFragmentDirections.actionAuthFragmentToWelcomeFragment()
+            )
         }
     }
 
@@ -100,8 +119,9 @@ class AuthFragment : Fragment() {
     }
 
     private fun lunchUserProfileFragment(userItemRead: UserItemRead) {
+        val args = RegisterArgs("mode_edit", userItemRead)
         findNavController().navigate(
-            AuthFragmentDirections.actionAuthFragmentToUserProfileFragment(userItemRead)
+            AuthFragmentDirections.actionAuthFragmentToUserProfileFragment(args)
         )
     }
 
